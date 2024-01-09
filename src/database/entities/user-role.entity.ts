@@ -10,23 +10,32 @@ import {
 	UpdateDateColumn,
 } from "typeorm";
 import { Users } from "./user.entity";
+import { Roles } from "./role.entity";
 
 @Entity()
-export class UserContacts {
+export class UserRoles {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column({ length: 50 })
-	provider: string;
+	@ManyToOne(() => Users, (user) => user.id, {
+		onDelete: "CASCADE",
+		onUpdate: "RESTRICT",
+	})
+	@JoinColumn({ name: "user_id" })
+	user: Users;
 
-	@Column({ length: 100, unique: true })
-	address: string;
+	@Column({ type: "uuid" })
+	user_id: string;
 
-	@Column({ default: true })
-	is_primary: Boolean;
+	@ManyToOne(() => Roles, (role) => role.id, {
+		onDelete: "CASCADE",
+		onUpdate: "RESTRICT",
+	})
+	@JoinColumn({ name: "role_id" })
+	role: Roles;
 
-	@Column({ default: false })
-	is_verified: Boolean;
+	@Column({ type: "uuid" })
+	role_id: string;
 
 	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
 	created_at: Date;
@@ -37,13 +46,4 @@ export class UserContacts {
 		onUpdate: "CURRENT_TIMESTAMP",
 	})
 	updated_at?: Date;
-
-	@ManyToOne(() => Users, (user) => user.contacts, {
-		onDelete: "CASCADE",
-		onUpdate: "RESTRICT",
-	})
-	@JoinColumn({ name: "user_id" })
-	user: Users;
-	@Column({ type: "uuid" })
-	user_id: string;
 }

@@ -1,6 +1,9 @@
 /** @format */
 
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+import { UserProfiles } from "./user-profile.entity";
+import { UserAddress } from "./user-address.entity";
+import { UserContacts } from "./user-contact.entity";
 
 @Entity()
 export class Users {
@@ -31,4 +34,29 @@ export class Users {
 		onUpdate: "CURRENT_TIMESTAMP",
 	})
 	updated_at?: Date;
+
+
+	  // define your relations
+	//   @OneToMany(() => UserRoles, (userRole) => userRole.user, {
+	// 	onDelete: 'SET NULL',
+	// 	onUpdate: 'CASCADE',
+	//   })
+	//   role?: UserRoles;
+	//   @OneToOne(() => UserProfiles, (profile) => profile.user, {
+	// 	onUpdate: 'RESTRICT',
+	// 	onDelete: 'CASCADE',
+	//   })
+	  profile?: UserProfiles;
+	
+	  @OneToOne(() => UserAddress, (address) => address.user, {
+		onUpdate: 'RESTRICT',
+		onDelete: 'CASCADE',
+	  })
+	  address?: UserAddress;
+	
+	  @OneToMany(() => UserContacts, (contact) => contact.user, {
+		onUpdate: 'RESTRICT',
+		onDelete: 'CASCADE',
+	  })
+	  contacts: UserContacts[];
 }

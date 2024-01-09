@@ -5,28 +5,31 @@ import {
 	CreateDateColumn,
 	Entity,
 	JoinColumn,
-	ManyToOne,
+	OneToOne,
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from "typeorm";
 import { Users } from "./user.entity";
 
 @Entity()
-export class UserContacts {
+export class UserAddress {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
 
-	@Column({ length: 50 })
-	provider: string;
-
-	@Column({ length: 100, unique: true })
+	@Column()
 	address: string;
 
-	@Column({ default: true })
-	is_primary: Boolean;
+	@Column({ length: 20 })
+	postal_code: string;
 
-	@Column({ default: false })
-	is_verified: Boolean;
+	@Column()
+	sub_district: string;
+
+	@Column()
+	district: string;
+
+	@Column({ length: 50 })
+	country: string;
 
 	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
 	created_at: Date;
@@ -38,12 +41,13 @@ export class UserContacts {
 	})
 	updated_at?: Date;
 
-	@ManyToOne(() => Users, (user) => user.contacts, {
-		onDelete: "CASCADE",
-		onUpdate: "RESTRICT",
-	})
-	@JoinColumn({ name: "user_id" })
-	user: Users;
-	@Column({ type: "uuid" })
-	user_id: string;
+	// define your relation
+	@OneToOne(() => Users, (user) => user.address, {
+		onDelete: 'CASCADE',
+		onUpdate: 'RESTRICT',
+	  })
+	  @JoinColumn({ name: 'user_id' })
+	  user: Users;
+	  @Column({ type: 'uuid' })
+	  user_id: string;
 }

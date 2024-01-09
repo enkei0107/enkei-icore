@@ -1,0 +1,1 @@
+{"version":3,"file":"permission.entity.d.ts","sourceRoot":"","sources":["../../../src/database/entities/permission.entity.ts"],"names":[],"mappings":"AAEA,qBACa,WAAW;IAEpB,EAAE,EAAE,MAAM,CAAC;IAGX,SAAS,EAAE,MAAM,CAAC;IAGlB,UAAU,EAAE,IAAI,CAAC;IAOjB,UAAU,CAAC,EAAE,IAAI,CAAC;CACnB"}

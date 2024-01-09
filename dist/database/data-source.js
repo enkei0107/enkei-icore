@@ -1,8 +1,9 @@
 "use strict";
+/** @format */
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.dataSourceOptions = void 0;
 const typeorm_1 = require("typeorm");
-require('dotenv').config();
+require("dotenv").config();
 exports.dataSourceOptions = {
     type: process.env.DATABASE_TYPE,
     host: process.env.DATABASE_HOST,
@@ -10,11 +11,11 @@ exports.dataSourceOptions = {
     username: process.env.DATABASE_USERNAME,
     password: process.env.DATABASE_PASSWORD,
     database: process.env.DATABASE_NAME,
-    logging: process.env.DATABASE_LOGGING === 'true' || false,
-    synchronize: process.env.DATABASE_SYNCHRONIZE === 'true' || false,
-    entities: ['dist/**/*.entity.js'],
-    migrations: ['dist/database/migrations/*.js'],
-    migrationsTableName: 'migrations',
+    logging: process.env.DATABASE_LOGGING === "true" || false,
+    synchronize: process.env.DATABASE_SYNCHRONIZE === "true" || false,
+    entities: ["node_modules/enkei/dist/**/*.entity.js", "dist/**/*.entity.js"],
+    migrations: ["dist/database/migrations/*.js"],
+    migrationsTableName: "migrations",
 };
 const dataSource = new typeorm_1.DataSource(exports.dataSourceOptions);
 exports.default = dataSource;

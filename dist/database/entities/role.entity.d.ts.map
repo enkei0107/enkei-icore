@@ -1,0 +1,1 @@
+{"version":3,"file":"role.entity.d.ts","sourceRoot":"","sources":["../../../src/database/entities/role.entity.ts"],"names":[],"mappings":"AAAA,cAAc;AAUd,OAAO,EAAE,mBAAmB,EAAE,MAAM,+BAA+B,CAAC;AACpE,qBACa,KAAK;IAEjB,EAAE,EAAE,MAAM,CAAC;IAGX,IAAI,EAAE,MAAM,CAAC;IAGb,UAAU,EAAE,IAAI,CAAC;IAOjB,UAAU,CAAC,EAAE,IAAI,CAAC;IAQjB,UAAU,EAAE,mBAAmB,EAAE,CAAC;CACnC"}

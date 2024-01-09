@@ -10,41 +10,40 @@ var __metadata = (this && this.__metadata) || function (k, v) {
     if (typeof Reflect === "object" && typeof Reflect.metadata === "function") return Reflect.metadata(k, v);
 };
 Object.defineProperty(exports, "__esModule", { value: true });
-exports.Users = void 0;
+exports.UserAddress = void 0;
 const typeorm_1 = require("typeorm");
-const user_address_entity_1 = require("./user-address.entity");
-const user_contact_entity_1 = require("./user-contact.entity");
-let Users = class Users {
+const user_entity_1 = require("./user.entity");
+let UserAddress = class UserAddress {
 };
-exports.Users = Users;
+exports.UserAddress = UserAddress;
 __decorate([
     (0, typeorm_1.PrimaryGeneratedColumn)("uuid"),
     __metadata("design:type", String)
-], Users.prototype, "id", void 0);
+], UserAddress.prototype, "id", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ length: 50, unique: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Users.prototype, "username", void 0);
+], UserAddress.prototype, "address", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)({ length: 20 }),
     __metadata("design:type", String)
-], Users.prototype, "password", void 0);
+], UserAddress.prototype, "postal_code", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: "timestamp" }),
-    __metadata("design:type", Date)
-], Users.prototype, "login_at", void 0);
-__decorate([
-    (0, typeorm_1.Column)({ nullable: true }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Users.prototype, "remember_token", void 0);
+], UserAddress.prototype, "sub_district", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ nullable: true, type: "text" }),
+    (0, typeorm_1.Column)(),
     __metadata("design:type", String)
-], Users.prototype, "avatar", void 0);
+], UserAddress.prototype, "district", void 0);
+__decorate([
+    (0, typeorm_1.Column)({ length: 50 }),
+    __metadata("design:type", String)
+], UserAddress.prototype, "country", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
-], Users.prototype, "created_at", void 0);
+], UserAddress.prototype, "created_at", void 0);
 __decorate([
     (0, typeorm_1.UpdateDateColumn)({
         type: "timestamp",
@@ -52,22 +51,20 @@ __decorate([
         onUpdate: "CURRENT_TIMESTAMP",
     }),
     __metadata("design:type", Date)
-], Users.prototype, "updated_at", void 0);
+], UserAddress.prototype, "updated_at", void 0);
 __decorate([
-    (0, typeorm_1.OneToOne)(() => user_address_entity_1.UserAddress, (address) => address.user, {
-        onUpdate: 'RESTRICT',
+    (0, typeorm_1.OneToOne)(() => user_entity_1.Users, (user) => user.address, {
         onDelete: 'CASCADE',
+        onUpdate: 'RESTRICT',
     }),
-    __metadata("design:type", user_address_entity_1.UserAddress)
-], Users.prototype, "address", void 0);
+    (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
+    __metadata("design:type", user_entity_1.Users)
+], UserAddress.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.OneToMany)(() => user_contact_entity_1.UserContacts, (contact) => contact.user, {
-        onUpdate: 'RESTRICT',
-        onDelete: 'CASCADE',
-    }),
-    __metadata("design:type", Array)
-], Users.prototype, "contacts", void 0);
-exports.Users = Users = __decorate([
+    (0, typeorm_1.Column)({ type: 'uuid' }),
+    __metadata("design:type", String)
+], UserAddress.prototype, "user_id", void 0);
+exports.UserAddress = UserAddress = __decorate([
     (0, typeorm_1.Entity)()
-], Users);
-//# sourceMappingURL=user.entity.js.map
+], UserAddress);
+//# sourceMappingURL=user-address.entity.js.map
