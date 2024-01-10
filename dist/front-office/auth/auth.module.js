@@ -10,13 +10,30 @@ exports.AuthModule = void 0;
 const common_1 = require("@nestjs/common");
 const auth_service_1 = require("./auth.service");
 const auth_controller_1 = require("./auth.controller");
+const typeorm_1 = require("@nestjs/typeorm");
+const user_entity_1 = require("../../database/entities/user.entity");
+const user_contact_entity_1 = require("../../database/entities/user-contact.entity");
+const role_entity_1 = require("../../database/entities/role.entity");
+const user_role_entity_1 = require("../../database/entities/user-role.entity");
+const passport_1 = require("@nestjs/passport");
+const jwt_1 = require("@nestjs/jwt");
+const user_service_1 = require("../user/user.service");
+const jwt_strategy_1 = require("./jwt.strategy");
+require('dotenv').config();
 let AuthModule = class AuthModule {
 };
 exports.AuthModule = AuthModule;
 exports.AuthModule = AuthModule = __decorate([
     (0, common_1.Module)({
-        providers: [auth_service_1.AuthService],
-        controllers: [auth_controller_1.AuthController]
+        imports: [typeorm_1.TypeOrmModule.forFeature([user_entity_1.Users, user_contact_entity_1.UserContacts, role_entity_1.Roles, user_role_entity_1.UserRoles]),
+            passport_1.PassportModule,
+            jwt_1.JwtModule.register({
+                secret: process.env.JWT_SECRET_KEY,
+                signOptions: { expiresIn: '1h' },
+            })],
+        providers: [auth_service_1.AuthService, user_service_1.UserService, jwt_strategy_1.JwtStrategy],
+        controllers: [auth_controller_1.AuthController],
+        exports: [typeorm_1.TypeOrmModule]
     })
 ], AuthModule);
 //# sourceMappingURL=auth.module.js.map
