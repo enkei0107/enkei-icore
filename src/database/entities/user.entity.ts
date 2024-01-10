@@ -4,6 +4,7 @@ import { Column, CreateDateColumn, Entity, OneToMany, OneToOne, PrimaryGenerated
 import { UserProfiles } from "./user-profile.entity";
 import { UserAddress } from "./user-address.entity";
 import { UserContacts } from "./user-contact.entity";
+import { UserRoles } from "./user-role.entity";
 
 @Entity()
 export class Users {
@@ -36,16 +37,16 @@ export class Users {
 	updated_at?: Date;
 
 
-	  // define your relations
-	//   @OneToMany(() => UserRoles, (userRole) => userRole.user, {
-	// 	onDelete: 'SET NULL',
-	// 	onUpdate: 'CASCADE',
-	//   })
-	//   role?: UserRoles;
-	//   @OneToOne(() => UserProfiles, (profile) => profile.user, {
-	// 	onUpdate: 'RESTRICT',
-	// 	onDelete: 'CASCADE',
-	//   })
+	//   define your relations
+	  @OneToMany(() => UserRoles, (userRole) => userRole.user, {
+		onDelete: 'SET NULL',
+		onUpdate: 'CASCADE',
+	  })
+	  role?: UserRoles;
+	  @OneToOne(() => UserProfiles, (profile) => profile.user, {
+		onUpdate: 'RESTRICT',
+		onDelete: 'CASCADE',
+	  })
 	  profile?: UserProfiles;
 	
 	  @OneToOne(() => UserAddress, (address) => address.user, {

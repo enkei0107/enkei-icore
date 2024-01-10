@@ -12,8 +12,10 @@ var __metadata = (this && this.__metadata) || function (k, v) {
 Object.defineProperty(exports, "__esModule", { value: true });
 exports.Users = void 0;
 const typeorm_1 = require("typeorm");
+const user_profile_entity_1 = require("./user-profile.entity");
 const user_address_entity_1 = require("./user-address.entity");
 const user_contact_entity_1 = require("./user-contact.entity");
+const user_role_entity_1 = require("./user-role.entity");
 let Users = class Users {
 };
 exports.Users = Users;
@@ -53,6 +55,20 @@ __decorate([
     }),
     __metadata("design:type", Date)
 ], Users.prototype, "updated_at", void 0);
+__decorate([
+    (0, typeorm_1.OneToMany)(() => user_role_entity_1.UserRoles, (userRole) => userRole.user, {
+        onDelete: 'SET NULL',
+        onUpdate: 'CASCADE',
+    }),
+    __metadata("design:type", user_role_entity_1.UserRoles)
+], Users.prototype, "role", void 0);
+__decorate([
+    (0, typeorm_1.OneToOne)(() => user_profile_entity_1.UserProfiles, (profile) => profile.user, {
+        onUpdate: 'RESTRICT',
+        onDelete: 'CASCADE',
+    }),
+    __metadata("design:type", user_profile_entity_1.UserProfiles)
+], Users.prototype, "profile", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => user_address_entity_1.UserAddress, (address) => address.user, {
         onUpdate: 'RESTRICT',

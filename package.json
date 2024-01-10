@@ -12,14 +12,29 @@
   "author": "enkei",
   "license": "ISC",
   "dependencies": {
+    "@faker-js/faker": "^8.3.1",
+    "@jorgebodega/typeorm-factory": "^1.4.0",
+    "@jorgebodega/typeorm-seeding": "^6.0.1",
     "@nestjs/common": "^10.3.0",
+    "@nestjs/core": "^10.3.0",
+    "@nestjs/jwt": "^10.2.0",
+    "@nestjs/passport": "^10.0.3",
+    "@nestjs/swagger": "^7.1.17",
     "@nestjs/typeorm": "^10.0.1",
-    "@types/node": "^20.10.7",
+    "@types/node": "^20.10.8",
+    "bcryptjs": "^2.4.3",
     "dotenv": "^16.3.1",
+    "nestjs-zod": "^3.0.0",
+    "passport": "^0.7.0",
+    "passport-jwt": "^4.0.1",
     "pg": "^8.11.3",
     "rimraf": "^5.0.5",
     "rxjs": "^7.8.1",
     "typeorm": "^0.3.19",
-    "typescript": "^5.3.3"
+    "typescript": "^5.3.3",
+    "zod": "^3.22.4"
+  },
+  "devDependencies": {
+    "@types/lodash": "^4.14.202"
   }
 }
