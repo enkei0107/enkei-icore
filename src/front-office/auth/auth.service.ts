@@ -80,7 +80,7 @@ export class AuthService {
 			where: {
 			  provider: UserContactProviderEnum.EMAIL,
 			  address: loginDto.email.toLocaleLowerCase(),
-			  is_primary: true,
+			  is_primary: 1,
 			},
 			relations: ['user', 'user.role.role'],
 		  });

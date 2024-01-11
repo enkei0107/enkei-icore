@@ -29,12 +29,25 @@ __decorate([
     __metadata("design:type", String)
 ], UserContacts.prototype, "address", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: true }),
-    __metadata("design:type", Boolean)
+    (0, typeorm_1.Column)({
+        type: "boolean",
+        default: true,
+        transformer: {
+            to: (value) => value === undefined ? true : value == 1 ? true : false,
+            from: (value) => (value ? 1 : 0),
+        },
+    }),
+    __metadata("design:type", Number)
 ], UserContacts.prototype, "is_primary", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ default: false }),
-    __metadata("design:type", Boolean)
+    (0, typeorm_1.Column)({
+        type: "boolean",
+        transformer: {
+            to: (value) => value === undefined ? false : value == 1 ? true : false,
+            from: (value) => (value ? 1 : 0),
+        },
+    }),
+    __metadata("design:type", Number)
 ], UserContacts.prototype, "is_verified", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),

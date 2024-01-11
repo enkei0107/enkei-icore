@@ -22,11 +22,26 @@ export class UserContacts {
 	@Column({ length: 100, unique: true })
 	address: string;
 
-	@Column({ default: true })
-	is_primary: Boolean;
+	@Column({
+		type: "boolean",
+		default: true,
+		transformer: {
+			to: (value: number | undefined) =>
+				value === undefined ? true : value == 1 ? true : false,
+			from: (value: boolean) => (value ? 1 : 0),
+		},
+	})
+	is_primary: number;
 
-	@Column({ default: false })
-	is_verified: Boolean;
+	@Column({
+		type: "boolean",
+		transformer: {
+			to: (value: number | undefined) =>
+				value === undefined ? false : value == 1 ? true : false,
+			from: (value: boolean) => (value ? 1 : 0),
+		},
+	})
+	is_verified: number;
 
 	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
 	created_at: Date;

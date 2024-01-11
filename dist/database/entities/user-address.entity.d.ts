@@ -6,6 +6,7 @@ export declare class UserAddress {
     postal_code: string;
     sub_district: string;
     district: string;
+    properties: JSON;
     country: string;
     created_at: Date;
     updated_at?: Date;

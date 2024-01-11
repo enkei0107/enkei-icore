@@ -37,6 +37,10 @@ __decorate([
     __metadata("design:type", String)
 ], UserAddress.prototype, "district", void 0);
 __decorate([
+    (0, typeorm_1.Column)({ type: "jsonb", default: {} }),
+    __metadata("design:type", Object)
+], UserAddress.prototype, "properties", void 0);
+__decorate([
     (0, typeorm_1.Column)({ length: 50 }),
     __metadata("design:type", String)
 ], UserAddress.prototype, "country", void 0);
@@ -54,14 +58,14 @@ __decorate([
 ], UserAddress.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => user_entity_1.Users, (user) => user.address, {
-        onDelete: 'CASCADE',
-        onUpdate: 'RESTRICT',
+        onDelete: "CASCADE",
+        onUpdate: "RESTRICT",
     }),
-    (0, typeorm_1.JoinColumn)({ name: 'user_id' }),
+    (0, typeorm_1.JoinColumn)({ name: "user_id" }),
     __metadata("design:type", user_entity_1.Users)
 ], UserAddress.prototype, "user", void 0);
 __decorate([
-    (0, typeorm_1.Column)({ type: 'uuid' }),
+    (0, typeorm_1.Column)({ type: "uuid" }),
     __metadata("design:type", String)
 ], UserAddress.prototype, "user_id", void 0);
 exports.UserAddress = UserAddress = __decorate([

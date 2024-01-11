@@ -105,7 +105,7 @@ let AuthService = class AuthService {
             where: {
                 provider: user_contact_provider_enum_1.UserContactProviderEnum.EMAIL,
                 address: loginDto.email.toLocaleLowerCase(),
-                is_primary: true,
+                is_primary: 1,
             },
             relations: ['user', 'user.role.role'],
         });

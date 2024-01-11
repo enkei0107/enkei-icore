@@ -28,6 +28,9 @@ export class UserAddress {
 	@Column()
 	district: string;
 
+	@Column({ type: "jsonb", default: {} })
+	properties: JSON;
+
 	@Column({ length: 50 })
 	country: string;
 
@@ -43,11 +46,11 @@ export class UserAddress {
 
 	// define your relation
 	@OneToOne(() => Users, (user) => user.address, {
-		onDelete: 'CASCADE',
-		onUpdate: 'RESTRICT',
-	  })
-	  @JoinColumn({ name: 'user_id' })
-	  user: Users;
-	  @Column({ type: 'uuid' })
-	  user_id: string;
+		onDelete: "CASCADE",
+		onUpdate: "RESTRICT",
+	})
+	@JoinColumn({ name: "user_id" })
+	user: Users;
+	@Column({ type: "uuid" })
+	user_id: string;
 }
