@@ -14,12 +14,13 @@ const user_module_1 = require("./user/user.module");
 const interceptor_provider_1 = require("../config/interceptor/interceptor.provider");
 const user_profile_module_1 = require("./user-profile/user-profile.module");
 const user_address_module_1 = require("./user-address/user-address.module");
+const user_contact_module_1 = require("./user-contact/user-contact.module");
 let FrontOfficeModule = class FrontOfficeModule {
 };
 exports.FrontOfficeModule = FrontOfficeModule;
 exports.FrontOfficeModule = FrontOfficeModule = __decorate([
     (0, common_1.Module)({
-        imports: [auth_module_1.AuthModule, user_module_1.UserModule, user_profile_module_1.UserProfileModule, user_address_module_1.UserAddressModule],
+        imports: [auth_module_1.AuthModule, user_module_1.UserModule, user_profile_module_1.UserProfileModule, user_address_module_1.UserAddressModule, user_contact_module_1.UserContactModule],
         controllers: [],
         providers: [...interceptor_provider_1.InterceptorProvider],
     })

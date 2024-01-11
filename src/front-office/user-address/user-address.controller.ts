@@ -10,7 +10,7 @@ import {
 	HttpStatus,
 } from "@nestjs/common";
 import { UserAddressService } from "./user-address.service";
-import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { AuthGuard } from "@nestjs/passport";
 import { zodToOpenAPI } from "nestjs-zod";
 import {
@@ -26,6 +26,7 @@ export class UserAddressController {
 	@Post()
 	@UseGuards(AuthGuard("jwt"))
 	@ApiBearerAuth()
+	@ApiOperation({summary:'Update Address'})
 	@ApiBody({ schema: zodToOpenAPI(UserAddressCreateDtoSchema) })
 	@ApiResponse({})
 	async updateOrCreate(

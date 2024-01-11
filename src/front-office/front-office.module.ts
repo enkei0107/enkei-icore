@@ -6,9 +6,10 @@ import { UserModule } from "./user/user.module";
 import { InterceptorProvider } from "../config/interceptor/interceptor.provider";
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { UserAddressModule } from './user-address/user-address.module';
+import { UserContactModule } from './user-contact/user-contact.module';
 
 @Module({
-	imports: [AuthModule, UserModule, UserProfileModule, UserAddressModule],
+	imports: [AuthModule, UserModule, UserProfileModule, UserAddressModule, UserContactModule],
 	controllers: [],
 	providers: [...InterceptorProvider],
 })
