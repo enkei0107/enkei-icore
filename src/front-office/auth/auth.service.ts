@@ -199,7 +199,6 @@ export class AuthService {
 					},
 				}
 			);
-			console.log(getUserInfo);
 			return {
 				email: getUserInfo?.data.email.toLowerCase(),
 				name: getUserInfo?.data?.name,
