@@ -20,6 +20,7 @@ import {
 import { ApiBody, ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { zodToOpenAPI } from "nestjs-zod";
 import { AuthLoginDto, AuthLoginDtoSchema } from "./dto/auth-login.dto";
+import { AuthOauth2Dto, AuthOauth2DtoSchema } from "./dto/auth-oauth2.dto";
 
 @Controller("api/auth")
 @ApiTags("Front Office - Auth")
@@ -52,6 +53,22 @@ export class AuthController {
 		const payload = AuthLoginDtoSchema.parse(loginDto);
 		try {
 			const user = await this.authService.login(payload);
+			const token = this.jwtService.sign({ sub: user.id });
+			return new AuthDtoResponse({ token, user });
+		} catch (error) {
+			throw new HttpException(error, HttpStatus.BAD_REQUEST);
+		}
+	}
+	@Post("oauth")
+	@ApiOperation({summary:"User Oauth"})
+	@ApiBody({schema:zodToOpenAPI(AuthOauth2DtoSchema)})
+	@ApiResponse({ type: AuthResponseDtoSchemaSwagger })
+	async oauth(
+		@Body() oauthDto:AuthOauth2Dto,
+	){
+		const payload = AuthOauth2DtoSchema.parse(oauthDto);
+		try {
+			const user = await this.authService.oauth2(payload);
 			const token = this.jwtService.sign({ sub: user.id });
 			return new AuthDtoResponse({ token, user });
 		} catch (error) {

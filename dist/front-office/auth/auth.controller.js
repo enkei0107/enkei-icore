@@ -22,6 +22,7 @@ const auth_response_1 = require("./response/auth.response");
 const swagger_1 = require("@nestjs/swagger");
 const nestjs_zod_1 = require("nestjs-zod");
 const auth_login_dto_1 = require("./dto/auth-login.dto");
+const auth_oauth2_dto_1 = require("./dto/auth-oauth2.dto");
 let AuthController = class AuthController {
     constructor(authService, jwtService) {
         this.authService = authService;
@@ -42,6 +43,17 @@ let AuthController = class AuthController {
         const payload = auth_login_dto_1.AuthLoginDtoSchema.parse(loginDto);
         try {
             const user = await this.authService.login(payload);
+            const token = this.jwtService.sign({ sub: user.id });
+            return new auth_response_1.AuthDtoResponse({ token, user });
+        }
+        catch (error) {
+            throw new common_1.HttpException(error, common_1.HttpStatus.BAD_REQUEST);
+        }
+    }
+    async oauth(oauthDto) {
+        const payload = auth_oauth2_dto_1.AuthOauth2DtoSchema.parse(oauthDto);
+        try {
+            const user = await this.authService.oauth2(payload);
             const token = this.jwtService.sign({ sub: user.id });
             return new auth_response_1.AuthDtoResponse({ token, user });
         }
@@ -71,6 +83,16 @@ __decorate([
     __metadata("design:paramtypes", [Object]),
     __metadata("design:returntype", Promise)
 ], AuthController.prototype, "login", null);
+__decorate([
+    (0, common_1.Post)("oauth"),
+    (0, swagger_1.ApiOperation)({ summary: "User Oauth" }),
+    (0, swagger_1.ApiBody)({ schema: (0, nestjs_zod_1.zodToOpenAPI)(auth_oauth2_dto_1.AuthOauth2DtoSchema) }),
+    (0, swagger_1.ApiResponse)({ type: auth_response_1.AuthResponseDtoSchemaSwagger }),
+    __param(0, (0, common_1.Body)()),
+    __metadata("design:type", Function),
+    __metadata("design:paramtypes", [Object]),
+    __metadata("design:returntype", Promise)
+], AuthController.prototype, "oauth", null);
 exports.AuthController = AuthController = __decorate([
     (0, common_1.Controller)("api/auth"),
     (0, swagger_1.ApiTags)("Front Office - Auth"),
