@@ -1,89 +1,47 @@
-<p align="center">
-  <a href="http://nestjs.com/" target="blank"><img src="https://nestjs.com/img/logo-small.svg" width="200" alt="Nest Logo" /></a>
-</p>
 
-[circleci-image]: https://img.shields.io/circleci/build/github/nestjs/nest/master?token=abc123def456
-[circleci-url]: https://circleci.com/gh/nestjs/nest
-
-  <p align="center">A progressive <a href="http://nodejs.org" target="_blank">Node.js</a> framework for building efficient and scalable server-side applications.</p>
-    <p align="center">
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/v/@nestjs/core.svg" alt="NPM Version" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/l/@nestjs/core.svg" alt="Package License" /></a>
-<a href="https://www.npmjs.com/~nestjscore" target="_blank"><img src="https://img.shields.io/npm/dm/@nestjs/common.svg" alt="NPM Downloads" /></a>
-<a href="https://circleci.com/gh/nestjs/nest" target="_blank"><img src="https://img.shields.io/circleci/build/github/nestjs/nest/master" alt="CircleCI" /></a>
-<a href="https://coveralls.io/github/nestjs/nest?branch=master" target="_blank"><img src="https://coveralls.io/repos/github/nestjs/nest/badge.svg?branch=master#9" alt="Coverage" /></a>
-<a href="https://discord.gg/G7Qnnhy" target="_blank"><img src="https://img.shields.io/badge/discord-online-brightgreen.svg" alt="Discord"/></a>
-<a href="https://opencollective.com/nest#backer" target="_blank"><img src="https://opencollective.com/nest/backers/badge.svg" alt="Backers on Open Collective" /></a>
-<a href="https://opencollective.com/nest#sponsor" target="_blank"><img src="https://opencollective.com/nest/sponsors/badge.svg" alt="Sponsors on Open Collective" /></a>
-  <a href="https://paypal.me/kamilmysliwiec" target="_blank"><img src="https://img.shields.io/badge/Donate-PayPal-ff3f59.svg"/></a>
-    <a href="https://opencollective.com/nest#sponsor"  target="_blank"><img src="https://img.shields.io/badge/Support%20us-Open%20Collective-41B883.svg" alt="Support us"></a>
-  <a href="https://twitter.com/nestframework" target="_blank"><img src="https://img.shields.io/twitter/follow/nestframework.svg?style=social&label=Follow"></a>
-</p>
-  <!--[![Backers on Open Collective](https://opencollective.com/nest/backers/badge.svg)](https://opencollective.com/nest#backer)
-  [![Sponsors on Open Collective](https://opencollective.com/nest/sponsors/badge.svg)](https://opencollective.com/nest#sponsor)-->
-
-## Description
-
-[Nest](https://github.com/nestjs/nest) framework TypeScript starter repository.
+# Nest Enkei Core Template REST API
+[Nest](https://github.com/nestjs/nest) Enkei Core Template is a ready-to-use REST API template for Nest.js.
 
 ## Installation
-
+To get started, create a new Nest.js app and install the Enkei package using [pnpm](https://pnpm.io/):
 ```bash
-$ pnpm install
-```
+# Create a new Nest.js app
+$ nest new new-app
 
-## Running the app
-
-```bash
-# configuration env
-- copy your env
-
-# migrate database schema
-$ pnpm typeorm migration:run
-
-# start app
-$ pnpm run start
-
+# Install Enkei package
+$ pnpm install enkei
 
 ```
+## Configure The App
+-  Configure Environment
+   - Copy the `env.example` file to `.env` and set the `DATABASE_SYNCHRONIZE` environment variable to `true`.
+- Import Module
+  - Import the necessary modules (`DatabaseModule`, `FrontOfficeModule`, `BackOfficeModule`) from the Enkei package into your app.
+  ```typescript
+    import { Module } from '@nestjs/common';
+    import { AppController } from './app.controller';
+    import { AppService } from './app.service';
+    import {DatabaseModule,FrontOfficeModule,BackOfficeModule} from 'enkei';
+    @Module({
+      imports: [DatabaseModule,FrontOfficeModule,BackOfficeModule],
+      controllers: [AppController],
+      providers: [AppService],
+    })
+    export class AppModule {}
+  ```
+- Configure Swagger
+  - Update the `main.ts` file to configure Swagger documentation. Use the `DocumentBuilder` to set the API title, description, version, and authentication methods.
+  ```typescript
+    const config = new DocumentBuilder()
+      .setTitle('Api Documentation')
+      .setDescription('Backend API description')
+      .setVersion('1.0')
+      .addBearerAuth()
+      .addBasicAuth()
+      .build();
+  ```
 
-## Test
-
-```bash
-# unit tests
-$ pnpm run test
-
-# e2e tests
-$ pnpm run test:e2e
-
-# test coverage
-$ pnpm run test:cov
-```
-
-## Migration
-
-```bash
-# generate new migration
-$ pnpm typeorm migration:generate src/database/migrations/{name}
-
-# run migration
-$ pnpm typeorm migration:run
-```
-
-## Seed
-
-```bash
-# run seed
-$ pnpm seed:run
-```
-## Support
-
-Nest is an MIT-licensed open source project. It can grow thanks to the sponsors and support by the amazing backers. If you'd like to join them, please [read more here](https://docs.nestjs.com/support).
-
-## Stay in touch
-
-- Author - [Enkei0107](https://enkei0107.ga)
-
-## License
-
-Nest is [MIT licensed](LICENSE).
+  ## Start The App
+  ```bash
+  $ pnpm start
+  ```
