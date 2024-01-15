@@ -214,7 +214,6 @@ let AuthService = class AuthService {
                     Authorization: `Bearer ${accessToken}`,
                 },
             });
-            console.log(getUserInfo);
             return {
                 email: getUserInfo === null || getUserInfo === void 0 ? void 0 : getUserInfo.data.email.toLowerCase(),
                 name: (_a = getUserInfo === null || getUserInfo === void 0 ? void 0 : getUserInfo.data) === null || _a === void 0 ? void 0 : _a.name,

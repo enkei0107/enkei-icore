@@ -7,9 +7,10 @@ import { InterceptorProvider } from "../config/interceptor/interceptor.provider"
 import { UserProfileModule } from './user-profile/user-profile.module';
 import { UserAddressModule } from './user-address/user-address.module';
 import { UserContactModule } from './user-contact/user-contact.module';
+import { MediaModule } from './media/media.module';
 
 @Module({
-	imports: [AuthModule, UserModule, UserProfileModule, UserAddressModule, UserContactModule],
+	imports: [AuthModule, UserModule, UserProfileModule, UserAddressModule, UserContactModule, MediaModule],
 	controllers: [],
 	providers: [...InterceptorProvider],
 })
