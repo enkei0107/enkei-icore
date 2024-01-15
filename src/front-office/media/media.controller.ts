@@ -18,7 +18,7 @@ import { MediaCreateDtoSchema } from "./dto/media-create.dto";
 import { AuthGuard } from "@nestjs/passport";
 import { zodToOpenAPI } from "nestjs-zod";
 
-@Controller("media")
+@Controller("api/media")
 @ApiTags("Media")
 export class MediaController {
 	constructor(private readonly mediaService: MediaService) {}
