@@ -1,20 +1,41 @@
-import { Column, CreateDateColumn, Entity, PrimaryGeneratedColumn, UpdateDateColumn } from "typeorm";
+/** @format */
+
+import {
+	Column,
+	CreateDateColumn,
+	Entity,
+	PrimaryGeneratedColumn,
+	UpdateDateColumn,
+} from "typeorm";
+import { SettingValueFormatDto } from "../../back-office/setting/dto/setting-value-format.dto";
 
 @Entity()
 export class Settings {
-  @PrimaryGeneratedColumn('uuid')
-  id: string;
+	@PrimaryGeneratedColumn("uuid")
+	id: string;
 
-  @Column({ type: 'jsonb', default: {} })
-  setting: Array<{ value: { type: string; property: any; is_active: string }; setting_name: string }>;;
+	@Column({ unique: true })
+	name: string;
 
-  @CreateDateColumn({ type: 'timestamp', default: () => 'CURRENT_TIMESTAMP' })
-  created_at: Date;
+	@Column({ type: "jsonb", default: {} })
+	value: SettingValueFormatDto;
 
-  @UpdateDateColumn({
-    type: 'timestamp',
-    default: () => 'CURRENT_TIMESTAMP',
-    onUpdate: 'CURRENT_TIMESTAMP',
+  @Column({
+    type: 'boolean',
+    transformer: {
+      to: (value: number | undefined) => value === undefined ? true : ((value == 1) ? true : false),
+      from: (value: boolean) => (value) ? 1 : 0,
+    },
   })
-  updated_at?: Date;
+	is_active: number;
+
+	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
+	created_at: Date;
+
+	@UpdateDateColumn({
+		type: "timestamp",
+		default: () => "CURRENT_TIMESTAMP",
+		onUpdate: "CURRENT_TIMESTAMP",
+	})
+	updated_at?: Date;
 }

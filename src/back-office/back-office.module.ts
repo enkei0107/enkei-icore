@@ -2,8 +2,9 @@
 
 import { Module } from "@nestjs/common";
 import { PermissionModule } from "./permission/permission.module";
+import { SettingModule } from './setting/setting.module';
 
 @Module({
-	imports: [PermissionModule],
+	imports: [PermissionModule, SettingModule],
 })
 export class BackOfficeModule {}

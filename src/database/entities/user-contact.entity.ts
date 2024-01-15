@@ -23,24 +23,23 @@ export class UserContacts {
 	address: string;
 
 	@Column({
-		type: "boolean",
+		type: 'boolean',
 		default: true,
 		transformer: {
-			to: (value: number | undefined) =>
-				value === undefined ? true : value == 1 ? true : false,
-			from: (value: boolean) => (value ? 1 : 0),
-		},
-	})
+		  to: (value: number | undefined) => value === undefined ? true : ((value == 1) ? true : false),
+		  from: (value: boolean) => (value) ? 1 : 0,
+		}
+	  })
 	is_primary: number;
 
 	@Column({
-		type: "boolean",
+		type: 'boolean',
 		transformer: {
-			to: (value: number | undefined) =>
-				value === undefined ? false : value == 1 ? true : false,
-			from: (value: boolean) => (value ? 1 : 0),
+		  to: (value: number | undefined) => value === undefined ? false : ((value == 1) ? true : false),
+		  from: (value: boolean) => (value) ? 1 : 0,
 		},
-	})
+	  })
+	  is_v
 	is_verified: number;
 
 	@CreateDateColumn({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" })
