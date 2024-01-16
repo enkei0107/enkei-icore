@@ -44,6 +44,17 @@ __decorate([
     __metadata("design:type", String)
 ], Users.prototype, "avatar", void 0);
 __decorate([
+    (0, typeorm_1.Column)({
+        type: "boolean",
+        default: true,
+        transformer: {
+            to: (value) => value === undefined ? true : value == 1 ? true : false,
+            from: (value) => (value ? 1 : 0),
+        },
+    }),
+    __metadata("design:type", Number)
+], Users.prototype, "is_active", void 0);
+__decorate([
     (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)
 ], Users.prototype, "created_at", void 0);
@@ -57,29 +68,29 @@ __decorate([
 ], Users.prototype, "updated_at", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => user_role_entity_1.UserRoles, (userRole) => userRole.user, {
-        onDelete: 'SET NULL',
-        onUpdate: 'CASCADE',
+        onDelete: "SET NULL",
+        onUpdate: "CASCADE",
     }),
     __metadata("design:type", user_role_entity_1.UserRoles)
 ], Users.prototype, "role", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => user_profile_entity_1.UserProfiles, (profile) => profile.user, {
-        onUpdate: 'RESTRICT',
-        onDelete: 'CASCADE',
+        onUpdate: "RESTRICT",
+        onDelete: "CASCADE",
     }),
     __metadata("design:type", user_profile_entity_1.UserProfiles)
 ], Users.prototype, "profile", void 0);
 __decorate([
     (0, typeorm_1.OneToOne)(() => user_address_entity_1.UserAddress, (address) => address.user, {
-        onUpdate: 'RESTRICT',
-        onDelete: 'CASCADE',
+        onUpdate: "RESTRICT",
+        onDelete: "CASCADE",
     }),
     __metadata("design:type", user_address_entity_1.UserAddress)
 ], Users.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.OneToMany)(() => user_contact_entity_1.UserContacts, (contact) => contact.user, {
-        onUpdate: 'RESTRICT',
-        onDelete: 'CASCADE',
+        onUpdate: "RESTRICT",
+        onDelete: "CASCADE",
     }),
     __metadata("design:type", Array)
 ], Users.prototype, "contacts", void 0);

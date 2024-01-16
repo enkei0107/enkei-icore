@@ -9,12 +9,22 @@ import {
 	PrimaryGeneratedColumn,
 	UpdateDateColumn,
 } from "typeorm";
-import { Users } from "./user.entity";
+import { Admins } from "./admin.entity";
 
 @Entity()
-export class UserContacts {
+export class AdminContacts {
 	@PrimaryGeneratedColumn("uuid")
 	id: string;
+
+	@ManyToOne(() => Admins, (admin) => admin.id, {
+		onDelete: "CASCADE",
+		onUpdate: "RESTRICT",
+	})
+	@JoinColumn({ name: "admin_id" })
+	admin: Admins;
+
+	@Column({ type: "uuid" })
+	admin_id: string;
 
 	@Column({ length: 50 })
 	provider: string;
@@ -52,13 +62,4 @@ export class UserContacts {
 		onUpdate: "CURRENT_TIMESTAMP",
 	})
 	updated_at?: Date;
-
-	@ManyToOne(() => Users, (user) => user.contacts, {
-		onDelete: "CASCADE",
-		onUpdate: "RESTRICT",
-	})
-	@JoinColumn({ name: "user_id" })
-	user: Users;
-	@Column({ type: "uuid" })
-	user_id: string;
 }

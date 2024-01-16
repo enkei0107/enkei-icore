@@ -30,25 +30,25 @@ __decorate([
 ], UserContacts.prototype, "address", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'boolean',
+        type: "boolean",
         default: true,
         transformer: {
-            to: (value) => value === undefined ? true : ((value == 1) ? true : false),
-            from: (value) => (value) ? 1 : 0,
-        }
+            to: (value) => value === undefined ? true : value == 1 ? true : false,
+            from: (value) => (value ? 1 : 0),
+        },
     }),
     __metadata("design:type", Number)
 ], UserContacts.prototype, "is_primary", void 0);
 __decorate([
     (0, typeorm_1.Column)({
-        type: 'boolean',
+        type: "boolean",
         transformer: {
-            to: (value) => value === undefined ? false : ((value == 1) ? true : false),
-            from: (value) => (value) ? 1 : 0,
+            to: (value) => value === undefined ? false : value == 1 ? true : false,
+            from: (value) => (value ? 1 : 0),
         },
     }),
-    __metadata("design:type", Object)
-], UserContacts.prototype, "is_v", void 0);
+    __metadata("design:type", Number)
+], UserContacts.prototype, "is_verified", void 0);
 __decorate([
     (0, typeorm_1.CreateDateColumn)({ type: "timestamp", default: () => "CURRENT_TIMESTAMP" }),
     __metadata("design:type", Date)

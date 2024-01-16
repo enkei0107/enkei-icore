@@ -5,7 +5,6 @@ export declare class UserContacts {
     provider: string;
     address: string;
     is_primary: number;
-    is_v: any;
     is_verified: number;
     created_at: Date;
     updated_at?: Date;

@@ -10,6 +10,7 @@ export declare class Users {
     login_at: Date;
     remember_token?: string;
     avatar?: string;
+    is_active: number;
     created_at: Date;
     updated_at?: Date;
     role?: UserRoles;
