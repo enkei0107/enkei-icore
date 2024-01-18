@@ -7,14 +7,23 @@ import {
 	HttpStatus,
 	Post,
 	Request,
+	UseGuards,
 } from "@nestjs/common";
 import { PermissionService } from "./permission.service";
-import { ApiOperation, ApiResponse, ApiTags } from "@nestjs/swagger";
+import {
+	ApiBearerAuth,
+	ApiOperation,
+	ApiResponse,
+	ApiTags,
+} from "@nestjs/swagger";
 import {
 	ShowPermissionItem,
 	ShowPermissionItemSwagger,
 } from "./response/show-permission.response";
 import { Request as ExpressRequest } from "express";
+import { AuthGuard } from "@nestjs/passport";
+import { Permissions } from "../../config/decorator/permission.decorator";
+import { PermissionGuard } from "../../config/guard/permission.guard";
 
 @Controller("backoffice/permissions")
 @ApiTags("Back Office - Permissions")
@@ -23,7 +32,10 @@ export class PermissionController {
 
 	@Get()
 	@ApiOperation({ summary: "Show Permissions" })
+	@ApiBearerAuth()
 	@ApiResponse({ type: ShowPermissionItemSwagger })
+	@Permissions(["GET /backoffice/permissions"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	async get() {
 		try {
 			const permissions = await this.permissionService.get();
@@ -44,6 +56,9 @@ export class PermissionController {
 	}
 	@Post()
 	@ApiOperation({ summary: "Synchronized Permission Endpoint" })
+	@ApiBearerAuth()
+	@Permissions(["POST /backoffice/permissions"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiResponse({})
 	async synchronized(@Request() req: ExpressRequest) {
 		try {
