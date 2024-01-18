@@ -10,8 +10,9 @@ import {
 	Param,
 	Post,
 	Put,
+	UseGuards,
 } from "@nestjs/common";
-import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { RoleAdminService } from "./role-admin.service";
 import {
 	RoleAdminCreateDto,
@@ -23,6 +24,9 @@ import {
 	RoleAdminPaginateResponse,
 	RoleAdminPaginateResponseSwagger,
 } from "./response/role-admin-paginate.response";
+import { Permissions } from "../../config/decorator/permission.decorator";
+import { AuthGuard } from "@nestjs/passport";
+import { PermissionGuard } from "../../config/guard/permission.guard";
 
 @Controller("backoffice/role-admin")
 @ApiTags("Back Office - Role Admin")
@@ -30,6 +34,9 @@ export class RoleAdminController {
 	constructor(private readonly roleService: RoleAdminService) {}
 
 	@Get()
+	@Permissions(["GET /backoffice/role-admin"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiResponse({ type: RoleAdminPaginateResponseSwagger })
 	async paginate(@Paginate() query: PaginateQuery) {
 		try {
@@ -40,6 +47,9 @@ export class RoleAdminController {
 		}
 	}
 	@Post()
+	@Permissions(["POST /backoffice/role-admin"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiBody({ schema: zodToOpenAPI(RoleAdminCreateDtoSchema) })
 	async create(@Body() createDto: RoleAdminCreateDto) {
 		const payload = RoleAdminCreateDtoSchema.parse(createDto);
@@ -51,6 +61,9 @@ export class RoleAdminController {
 		}
 	}
 	@Put(":id")
+	@Permissions(["PUT /backoffice/role-admin/:id"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiBody({ schema: zodToOpenAPI(RoleAdminCreateDtoSchema) })
 	async update(@Body() updateDto: RoleAdminCreateDto, @Param("id") id: string) {
 		const payload = RoleAdminCreateDtoSchema.parse(updateDto);
@@ -63,6 +76,9 @@ export class RoleAdminController {
 	}
 
 	@Delete(":id")
+	@Permissions(["DELETE /backoffice/role-admin/:id"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	async remove(@Param("id") id: string) {
 		try {
 			await this.roleService.remove(id);

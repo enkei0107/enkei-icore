@@ -10,13 +10,14 @@ import {
 	Param,
 	Post,
 	Put,
+	UseGuards,
 } from "@nestjs/common";
 import { SettingService } from "./setting.service";
 import {
 	SettingCreateDto,
 	SettingCreateDtoSchema,
 } from "./dto/setting-create.dto";
-import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { zodToOpenAPI } from "nestjs-zod";
 import {
 	SettingUpdateDto,
@@ -28,14 +29,20 @@ import {
 } from "./response/setting-show.response";
 import { Paginate, PaginateQuery } from "nestjs-paginate";
 import { SettingsPaginateResponse } from "./response/setting-paginate.response";
+import { Permissions } from "../../config/decorator/permission.decorator";
+import { AuthGuard } from "@nestjs/passport";
+import { PermissionGuard } from "../../config/guard/permission.guard";
 
-@Controller("backoffice/setting")
+@Controller("backoffice/settings")
 @ApiTags("Back Office - Settings")
 export class SettingController {
 	constructor(private readonly settingService: SettingService) {}
 
 	@Post()
 	@ApiBody({ schema: zodToOpenAPI(SettingCreateDtoSchema) })
+	@Permissions(["POST /backoffice/settings"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiResponse({})
 	async create(@Body() createDto: SettingCreateDto) {
 		const payload = SettingCreateDtoSchema.parse(createDto);
@@ -48,6 +55,9 @@ export class SettingController {
 	}
 
 	@Put(":id")
+	@Permissions(["PUT /backoffice/setting/:id"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiBody({ schema: zodToOpenAPI(SettingUpdateDtoSchema) })
 	@ApiResponse({})
 	async update(@Param("id") id: string, @Body() updateDto: SettingUpdateDto) {
@@ -61,6 +71,9 @@ export class SettingController {
 	}
 
 	@Get()
+	@Permissions(["GET /backoffice/setting"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	async paginate(
 		@Paginate() query:PaginateQuery
 	){
@@ -73,6 +86,9 @@ export class SettingController {
 	}
 
 	@Get(":id")
+	@Permissions(["GET /backoffice/setting/:id"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiResponse({ type: SettingShowResponseSwagger })
 	async show(@Param("id") id: string) {
 		try {
@@ -84,6 +100,9 @@ export class SettingController {
 	}
 
 	@Delete(":id")
+	@Permissions(["DELETE /backoffice/setting/:id"])
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	@ApiBearerAuth()
 	@ApiResponse({})
 	async remove(@Param("id") id: string) {
 		try {
