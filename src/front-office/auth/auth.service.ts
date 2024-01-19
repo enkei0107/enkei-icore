@@ -90,6 +90,11 @@ export class AuthService {
 			relations: ["user", "user.role.role"],
 		});
 		if (user && bcrypt.compareSync(loginDto.password, user["user"].password)) {
+			if (user?.user?.is_active == 0) {
+				throw new Error(
+					"User Has been deactivated ,contact your administrator"
+				);
+			}
 			return user["user"];
 		}
 		throw new Error("Email or Password is invalid");

@@ -1,1 +1,0 @@
-{"version":3,"file":"role.seeder.d.ts","sourceRoot":"","sources":["../../../src/database/seeders/role.seeder.ts"],"names":[],"mappings":"AAAA,OAAO,EAAE,MAAM,EAAE,MAAM,8BAA8B,CAAC;AACtD,OAAO,EAAE,UAAU,EAAE,MAAM,SAAS,CAAC;AAKrC,qBAAa,UAAW,SAAQ,MAAM;IAC5B,GAAG,CAAC,UAAU,EAAE,UAAU,GAAG,OAAO,CAAC,IAAI,CAAC;CAMjD"}
