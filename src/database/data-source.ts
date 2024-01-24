@@ -11,6 +11,7 @@ export const dataSourceOptions: DataSourceOptions = {
 	password: process.env.DATABASE_PASSWORD,
 	database: process.env.DATABASE_NAME,
 	logging: process.env.DATABASE_LOGGING === "true" || false,
+	ssl: process.env.DATABASE_SSL === "true" || false,
 	synchronize: process.env.DATABASE_SYNCHRONIZE === "true" || false,
 	entities: ["node_modules/enkei/dist/**/*.entity.js", "dist/**/*.entity.js"],
 	migrations: ["dist/database/migrations/*.js"],
