@@ -9,8 +9,12 @@ export class AuthDtoResponse {
     })
     token: string;
 
-    @ApiProperty({ enum: [Object.values(UserAccountTypeEnum)] })
-    role: Array<string>;
+    @ApiProperty({
+      type: [String],
+      example: ['admin', 'user'], 
+      description: 'Array of roles', 
+    })
+    role: string[];
   
     constructor(data:any) {
       this.token = data?.token || '';
