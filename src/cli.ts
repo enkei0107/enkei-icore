@@ -11,3 +11,5 @@ command('deploy')
     const deployCommand = new DeployEnkei();
     deployCommand.execute();
 });
+
+program.parse(process.argv);

@@ -24,7 +24,10 @@ import { RoleAdminController } from "./back-office/role-admin/role-admin.control
 import { SettingModule } from "./back-office/setting/setting.module";
 import { SettingService } from "./back-office/setting/setting.service";
 import { SettingController } from "./back-office/setting/setting.controller";
-import { from } from "rxjs";
+import { PermissionGuard } from "./config/guard/permission.guard";
+import {Permissions} from "./config/decorator/permission.decorator";
+import { JwtStrategy } from "./front-office/auth/jwt.strategy";
+import { AdminJwtStrategy } from "./back-office/admin/admin.jwt.strategy";
 
 
 
@@ -36,7 +39,13 @@ export * from 'nestjs-paginate';
 export * from '@faker-js/faker';
 export * from '@nestjs/swagger';
 
+export * from '@nestjs/jwt';
+export * from '@nestjs/passport';
 export {
+	PermissionGuard,
+	JwtStrategy,
+	AdminJwtStrategy,
+	Permissions,
 	DatabaseModule,
 	dataSourceOptions,
 	AuthModule,

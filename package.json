@@ -1,12 +1,15 @@
 {
   "name": "enkei",
-  "version": "0.0.3",
-  "description": "",
+  "version": "0.0.4",
+  "description": "Template Core API ",
   "main": "dist/index.js",
   "files": [
-    "dist",
-    "src"
+    "dist"
   ],
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/enkei0107/enkei-icore.git"
+  },
   "bin": "dist/cli.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
@@ -15,6 +18,10 @@
   },
   "author": "enkei",
   "license": "ISC",
+  "peerDependencies": {
+    "@jorgebodega/typeorm-factory": "^1.4.0",
+    "@jorgebodega/typeorm-seeding": "^6.0.1"
+  },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",
     "@jorgebodega/typeorm-factory": "^1.4.0",
