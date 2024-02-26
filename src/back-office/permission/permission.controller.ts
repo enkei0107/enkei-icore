@@ -57,8 +57,8 @@ export class PermissionController {
 	@Post()
 	@ApiOperation({ summary: "Synchronized Permission Endpoint" })
 	@ApiBearerAuth()
-	@Permissions(["POST /backoffice/permissions"])
-	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
+	// @Permissions(["POST /backoffice/permissions"])
+	@UseGuards(AuthGuard("admin-jwt"))
 	@ApiResponse({})
 	async synchronized(@Request() req: ExpressRequest) {
 		try {
