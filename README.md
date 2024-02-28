@@ -77,7 +77,8 @@ $ pnpm start:dev
   "scripts":{
     "typeorm": "pnpm build && pnpm dlx typeorm -d node_modules/enkei/dist/database/data-source.js",
     "migration:generate": "pnpm typeorm -- migration:generate",
-    "migration:run": "pnpm typeorm -- migration:run"
+    "migration:run": "pnpm typeorm -- migration:run",
+    "seed:run":"pnpm build && pnpm typeorm-seeding -d node_modules/enkei/dist/database/data-source.js seed {path default seed}"
   }  
 ```
 - Script Migration Database

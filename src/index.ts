@@ -24,14 +24,25 @@ import { RoleAdminController } from "./back-office/role-admin/role-admin.control
 import { SettingModule } from "./back-office/setting/setting.module";
 import { SettingService } from "./back-office/setting/setting.service";
 import { SettingController } from "./back-office/setting/setting.controller";
+import { RoleAdminPermissionModule } from "./back-office/role-admin-permission/role-admin-permission.module";
+import { RoleAdminPermissionService } from "./back-office/role-admin-permission/role-admin-permission.service";
+import { RoleAdminPermissionController } from "./back-office/role-admin-permission/role-admin-permission.controller";
+import { BankModule } from "./back-office/bank/bank.module";
+import { BankService } from "./back-office/bank/bank.service";
+import { BankController } from "./back-office/bank/bank.controller";
 import { PermissionGuard } from "./config/guard/permission.guard";
 import {Permissions} from "./config/decorator/permission.decorator";
 import { JwtStrategy } from "./front-office/auth/jwt.strategy";
 import { AdminJwtStrategy } from "./back-office/admin/admin.jwt.strategy";
 
+// Seeder
+import { RolesFactory } from "./database/factories/role.factory";
+import { RoleAdminFactory } from "./database/factories/role-admin.factory";
+import { RoleSeeder } from "./database/seeders/role.seeder";
+import { RoleAdminSeeder } from "./database/seeders/role-admin.seeder";
+import InitialDatabaseSeed from "./database/seeders/database.seeder";
 
-
-// package
+// Package
 export * from 'typeorm';
 export * from 'zod';
 export * from 'nestjs-zod';
@@ -48,6 +59,16 @@ export {
 	Permissions,
 	DatabaseModule,
 	dataSourceOptions,
+
+	// Seeder
+	RolesFactory,
+	RoleAdminFactory,
+	RoleSeeder,
+	RoleAdminSeeder,
+	InitialDatabaseSeed,
+	
+
+	// Front Office
 	AuthModule,
 	AuthService,
 	AuthController,
@@ -56,6 +77,7 @@ export {
 	MediaController,
 	FrontOfficeModule,
 
+	// Back Office
 	BackOfficeModule,
 	AdminModule,
 	AdminService,
@@ -63,6 +85,12 @@ export {
 	RoleAdminModule,
 	RoleAdminService,
 	RoleAdminController,
+	RoleAdminPermissionModule,
+	RoleAdminPermissionService,
+	RoleAdminPermissionController,
+	BankModule,
+	BankService,
+	BankController,
 	PermissionModule,
 	PermissionService,
 	PermissionController,
