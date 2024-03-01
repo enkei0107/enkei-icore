@@ -38,10 +38,10 @@ export class UserBanks {
 	@Column({ type: "text" })
 	bank_holder: string;
 
-	@Column({ type: "text" })
+	@Column({ type: "text" ,unique:true})
 	bank_account_number: string;
 
-	@Column({ type: "timestamp" })
+	@Column({ type: "timestamp" ,nullable:true})
 	verified_at: Date;
 
 	@Column({
