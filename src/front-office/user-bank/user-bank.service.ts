@@ -16,7 +16,7 @@ export class UserBankService {
 	) {}
 
 	async create(createDto: UserBankCreateDto, user_id: string) {
-		const exist = await this.userBankRepository.findOneOrFail({
+		const exist = await this.userBankRepository.findOne({
 			where: {
 				user_id: user_id,
 				is_primary: 1,

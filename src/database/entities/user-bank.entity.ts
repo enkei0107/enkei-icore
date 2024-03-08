@@ -11,6 +11,7 @@ import {
 } from "typeorm";
 import { Users } from "./user.entity";
 import { Banks } from "./bank.entity";
+import { EncryptTransformer } from "../../config/transformers/encrypt.transformer";
 
 @Entity()
 export class UserBanks {
@@ -38,7 +39,7 @@ export class UserBanks {
 	@Column({ type: "text" })
 	bank_holder: string;
 
-	@Column({ type: "text" ,unique:true})
+	@Column({ type: "text" ,unique:true,transformer: new EncryptTransformer('aes-256-cbc')})
 	bank_account_number: string;
 
 	@Column({ type: "timestamp" ,nullable:true})
