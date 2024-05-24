@@ -1,6 +1,6 @@
 {
   "name": "enkei",
-  "version": "0.0.4-dev",
+  "version": "0.1",
   "description": "Template Core API ",
   "main": "dist/index.js",
   "files": [
