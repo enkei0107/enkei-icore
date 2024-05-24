@@ -23,6 +23,7 @@ $ pnpm enkei deploy
       DATABASE_NAME=
       DATABASE_USERNAME=
       DATABASE_PASSWORD=
+      DATABASE_SECRET_KEY=
       DATABASE_SSL=
       DATABASE_LOGGING=
       DATABASE_SYNCHRONIZE=
@@ -61,16 +62,9 @@ $ pnpm enkei deploy
       .addBearerAuth()
       .addBasicAuth()
       .build();
+    const document = SwaggerModule.createDocument(app, config);
+    SwaggerModule.setup('api', app, document);
   ```
-## Start The App
-```bash
-# production
-$ pnpm build
-$ pnpm start
-
-# development
-$ pnpm start:dev
-```
 ## Configure Migration Database
 - Configure package.json add this below
 ```json
@@ -88,6 +82,15 @@ $ pnpm typeorm migration:generate src/database/migrations/{name}
 
 # run migration
 $ pnpm typeorm migration:run
+```
+## Start The App
+```bash
+# production
+$ pnpm build
+$ pnpm start
+
+# development
+$ pnpm start:dev
 ```
 ## Configure Seeder And Factories Database
 - [**LINK DOC SEEDER**](https://www.npmjs.com/package/@jorgebodega/typeorm-seeding)

@@ -50,7 +50,8 @@ export class AuthService {
 							name: registerDto.role,
 						},
 					});
-					const hashedPassword = await bcrypt.hash(registerDto.password, 10);
+					const salt = await bcrypt.genSaltSync(10);
+					const hashedPassword = await bcrypt.hash(registerDto.password, salt);
 					const newUser = manager.create(Users, {
 						username: await this.generatedUniqueUsername(registerDto.username),
 						password: hashedPassword,

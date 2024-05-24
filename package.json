@@ -1,6 +1,6 @@
 {
-  "name": "enkei",
-  "version": "0.0.4",
+  "name": "Nest Core API APP",
+  "version": "0.0.4-dev",
   "description": "Template Core API ",
   "main": "dist/index.js",
   "files": [
@@ -20,7 +20,9 @@
   "license": "ISC",
   "peerDependencies": {
     "@jorgebodega/typeorm-factory": "^1.4.0",
-    "@jorgebodega/typeorm-seeding": "^6.0.1"
+    "@jorgebodega/typeorm-seeding": "^6.0.1",
+    "@nestjs/typeorm": "^10.0.1",
+    "typeorm": "^0.3.19"
   },
   "dependencies": {
     "@faker-js/faker": "^8.3.1",

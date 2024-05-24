@@ -36,6 +36,7 @@ export class DeployEnkei {
 						stdio: "inherit",
 					});
 					createFolder('./src/database/entities');
+					createFolder('./src/database/migrations');
 					createFolder('./src/database/seeders');
 					createFolder('./src/database/factories');
 					createFolder('./src/config');

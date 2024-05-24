@@ -2,6 +2,7 @@
 
 import { DatabaseModule } from "./database/database.module";
 import { dataSourceOptions } from "./database/data-source";
+import { TypeOrmModule } from "@nestjs/typeorm";
 import { AuthModule } from "./front-office/auth/auth.module";
 import { AuthService } from "./front-office/auth/auth.service";
 import { AuthController } from "./front-office/auth/auth.controller";
@@ -59,12 +60,12 @@ import InitialDatabaseSeed from "./database/seeders/database.seeder";
 
 // Package
 export * from 'typeorm';
+export * from '@nestjs/typeorm';
 export * from 'zod';
 export * from 'nestjs-zod';
 export * from 'nestjs-paginate';
 export * from '@faker-js/faker';
 export * from '@nestjs/swagger';
-
 export * from '@nestjs/jwt';
 export * from '@nestjs/passport';
 export {
