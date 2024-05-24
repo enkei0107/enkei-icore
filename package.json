@@ -1,5 +1,5 @@
 {
-  "name": "Nest Core API APP",
+  "name": "enkei",
   "version": "0.0.4-dev",
   "description": "Template Core API ",
   "main": "dist/index.js",
