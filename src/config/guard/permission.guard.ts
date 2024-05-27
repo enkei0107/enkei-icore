@@ -9,7 +9,7 @@ import { Permissions } from "../decorator/permission.decorator";
 export class PermissionGuard implements CanActivate {
 	private permissionService: PermissionService;
 	constructor(
-		@Inject(Reflector.name) private reflector: Reflector,
+		private reflector: Reflector,
 		permissionService: PermissionService
 	) {
 		this.permissionService = permissionService;

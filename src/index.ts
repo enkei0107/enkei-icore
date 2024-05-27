@@ -59,6 +59,7 @@ import { RoleAdminSeeder } from "./database/seeders/role-admin.seeder";
 import InitialDatabaseSeed from "./database/seeders/database.seeder";
 
 // Package
+export * from '@nestjs/core';
 export * from 'typeorm';
 export * from '@nestjs/typeorm';
 export * from 'zod';
