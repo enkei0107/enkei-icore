@@ -1,6 +1,6 @@
 /** @format */
 
-import { CanActivate, ExecutionContext, Injectable } from "@nestjs/common";
+import { CanActivate, ExecutionContext, Inject, Injectable } from "@nestjs/common";
 import { Reflector } from "@nestjs/core";
 import { PermissionService } from "../../back-office/permission/permission.service";
 import { Permissions } from "../decorator/permission.decorator";
@@ -9,7 +9,7 @@ import { Permissions } from "../decorator/permission.decorator";
 export class PermissionGuard implements CanActivate {
 	private permissionService: PermissionService;
 	constructor(
-		private reflector: Reflector,
+		@Inject(Reflector.name) private reflector: Reflector,
 		permissionService: PermissionService
 	) {
 		this.permissionService = permissionService;
