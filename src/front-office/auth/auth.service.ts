@@ -91,7 +91,7 @@ export class AuthService {
 			relations: ["user", "user.role.role"],
 		});
 		if (user && bcrypt.compareSync(loginDto.password, user["user"].password)) {
-			if (user?.user?.is_active == 0) {
+			if (user?.user?.is_active != 1) {
 				throw new Error(
 					"User Has been deactivated ,contact your administrator"
 				);
@@ -122,6 +122,11 @@ export class AuthService {
 				relations: ["user", "user.role.role"],
 			});
 			if (findUser) {
+				if (findUser?.user?.is_active != 1) {
+					throw new Error(
+						"User Has been deactivated ,contact your administrator"
+					);
+				}
 				return findUser["user"];
 			} else {
 				return this.userRepository.manager.transaction(

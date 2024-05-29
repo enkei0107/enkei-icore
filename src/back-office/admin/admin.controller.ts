@@ -6,13 +6,14 @@ import {
 	HttpException,
 	HttpStatus,
 	Post,
+	UseGuards,
 } from "@nestjs/common";
 import { AdminService } from "./admin.service";
 import {
 	AdminRegisterDto,
 	AdminRegisterDtoSchema,
 } from "./dto/admin-register.dto";
-import { ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
+import { ApiBearerAuth, ApiBody, ApiResponse, ApiTags } from "@nestjs/swagger";
 import { zodToOpenAPI } from "nestjs-zod";
 import {
 	AdminAuthResponse,
@@ -20,6 +21,9 @@ import {
 } from "./response/admin-auth.response";
 import { AdminLoginDto, AdminLoginDtoSchema } from "./dto/admin-login.dto";
 import { JwtService } from "@nestjs/jwt";
+import { Permissions } from "../../config/decorator/permission.decorator";
+import { AuthGuard } from "@nestjs/passport";
+import { PermissionGuard } from "../../config/guard/permission.guard";
 
 @Controller("backoffice/auth")
 @ApiTags("Back Office - Auth")
@@ -30,6 +34,9 @@ export class AdminController {
 	) {}
 
 	@Post("register")
+	@Permissions(["POST /backoffice/auth/register"])
+	@ApiBearerAuth()
+	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiBody({ schema: zodToOpenAPI(AdminRegisterDtoSchema) })
 	@ApiResponse({ type: AdminAuthResponseSchemaSwagger })
 	async register(@Body() registerDto: AdminRegisterDto) {
@@ -43,7 +50,7 @@ export class AdminController {
 		}
 	}
 	@Post("login")
-	@ApiBody({schema:zodToOpenAPI(AdminLoginDtoSchema)})
+	@ApiBody({ schema: zodToOpenAPI(AdminLoginDtoSchema) })
 	@ApiResponse({ type: AdminAuthResponseSchemaSwagger })
 	async login(@Body() loginDto: AdminLoginDto) {
 		const payload = AdminLoginDtoSchema.parse(loginDto);

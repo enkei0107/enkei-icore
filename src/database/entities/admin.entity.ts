@@ -31,14 +31,11 @@ export class Admins {
 	@Column({ nullable: true, type: "text" })
 	avatar?: string;
 
-	@Column({ nullable: true })
-	status_data: string;
-
 	@Column({
 		type: "boolean",
 		transformer: {
 			to: (value: number | undefined) =>
-				value === undefined ? false : value == 1 ? true : false,
+				value === undefined ? true : value == 1 ? true : false,
 			from: (value: boolean) => (value ? 1 : 0),
 		},
 	})

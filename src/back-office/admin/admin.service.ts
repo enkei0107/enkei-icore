@@ -80,6 +80,9 @@ export class AdminService {
 			relations: ["admin.admin_role.role"],
 		});
 		if (user && bcrypt.compareSync(loginDto.password, user["admin"].password)) {
+			if (user?.admin?.is_active != 1) {
+				throw new Error("User Has been deactivated ,contact your administrator");
+			}
 			return user.admin;
 		}
 		throw new Error("Email or Password is invalid");
