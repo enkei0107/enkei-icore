@@ -9,6 +9,7 @@ import { RoleAdminFactory } from "../factories/role-admin.factory";
 export class RoleAdminSeeder extends Seeder {
 	async run(dataSource: DataSource): Promise<void> {
 		console.log("\n Running RoleAdminSeeder");
+		await dataSource.query(`TRUNCATE TABLE ROLE_ADMINS RESTART IDENTITY CASCADE`);
 		const roleAdminEnum = Object.values(AdminRoleEnum);
 		const role: RoleAdmins[] = await new RoleAdminFactory().createMany(
 			roleAdminEnum.length

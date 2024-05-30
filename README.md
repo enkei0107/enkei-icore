@@ -95,3 +95,10 @@ $ pnpm start:dev
 ## Configure Seeder And Factories Database
 - [**LINK DOC SEEDER**](https://www.npmjs.com/package/@jorgebodega/typeorm-seeding)
 - [**LINK DOC FACTORY**](https://www.npmjs.com/package/@jorgebodega/typeorm-factory)
+
+__NOTE__: Seeder
+```bash
+# Account BackOffice
+$ super@admin.com
+$ Password@1
+```
