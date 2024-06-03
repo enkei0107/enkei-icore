@@ -100,8 +100,3 @@ export const endpoints: EndpointFactory[] = [
 		end_point: "DELETE /backoffice/banks/:id",
 	},
 ];
-
-// Example usage:
-endpoints.forEach((endpoint) => {
-	console.log(endpoint.end_point);
-});

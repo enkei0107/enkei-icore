@@ -55,7 +55,7 @@ export class SettingController {
 	}
 
 	@Put(":id")
-	@Permissions(["PUT /backoffice/setting/:id"])
+	@Permissions(["PUT /backoffice/settings/:id"])
 	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiBearerAuth()
 	@ApiBody({ schema: zodToOpenAPI(SettingUpdateDtoSchema) })
@@ -71,7 +71,7 @@ export class SettingController {
 	}
 
 	@Get()
-	@Permissions(["GET /backoffice/setting"])
+	@Permissions(["GET /backoffice/settings"])
 	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiBearerAuth()
 	async paginate(
@@ -86,7 +86,7 @@ export class SettingController {
 	}
 
 	@Get(":id")
-	@Permissions(["GET /backoffice/setting/:id"])
+	@Permissions(["GET /backoffice/settings/:id"])
 	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiBearerAuth()
 	@ApiResponse({ type: SettingShowResponseSwagger })
@@ -100,7 +100,7 @@ export class SettingController {
 	}
 
 	@Delete(":id")
-	@Permissions(["DELETE /backoffice/setting/:id"])
+	@Permissions(["DELETE /backoffice/settings/:id"])
 	@UseGuards(AuthGuard("admin-jwt"), PermissionGuard)
 	@ApiBearerAuth()
 	@ApiResponse({})
